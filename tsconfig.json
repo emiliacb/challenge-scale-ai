@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["../src/*"],
+      "@/*": ["./*"]
     },
+    "lib": ["DOM", "ES2015.Promise", "ES5"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "config.ts"]
 }

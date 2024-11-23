@@ -7,9 +7,9 @@
     "config": ".prettierrc"
   },
   "scripts": {
-    "build": "parcel build src/index.html",
-    "start": "parcel serve src/index.html",
-    "dev": "parcel serve src/index.html --open"
+    "dev": "parcel ./src/index.html --no-cache --port 3000",
+    "build": "parcel build ./src/index.html",
+    "start": "npx serve ./dist"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
