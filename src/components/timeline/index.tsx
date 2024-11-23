@@ -1,5 +1,6 @@
 import React from "react";
 import { useTimeline } from "@/context/timeline";
+import { useThrottleFn } from "react-use";
 
 /**
  * Timeline component provides a user interface for navigating through frames of a timeline.
@@ -15,7 +16,7 @@ export function Timeline() {
   } = useTimeline();
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFrameIndex(parseInt(event.target.value));
+    setFrameIndex?.(parseInt(event.target.value));
   };
 
   return (

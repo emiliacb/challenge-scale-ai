@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "parcel ./src/index.html --no-cache --port 3000",
     "build": "parcel build ./src/index.html",
-    "start": "npx serve ./dist"
+    "start": "npx serve ./dist",
+    "clean": "rm -rf dist && rm -rf .parcel-cache && rm -rf node_modules && rm -rf pnpm-lock.yaml"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { TimelineContext } from "@/interfaces/timeline";
 import { TimelineProviderProps } from "@/types/timeline";
+import { useThrottle } from "react-use";
 
 const TimelineContext = createContext<TimelineContext | undefined>(undefined);
 
@@ -12,6 +13,7 @@ export function TimelineProvider({
   minFrame,
   maxFrame,
 }: TimelineProviderProps) {
+  const [isLoadingFrame, setIsLoadingFrame] = useState(true);
   const [frameIndex, setFrameIndex] = useState(minFrame);
 
   const nextFrame = () => {
@@ -28,8 +30,13 @@ export function TimelineProvider({
     }
   };
 
+  const throttledFrameIndex = useThrottle(frameIndex, 500);
+
   const value = {
+    isLoadingFrame,
+    setIsLoadingFrame,
     frameIndex,
+    throttledFrameIndex,
     setFrameIndex,
     nextFrame,
     previousFrame,

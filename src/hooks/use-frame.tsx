@@ -16,18 +16,17 @@ const requestClient = new RequestClient();
  * of making API calls and managing state.
  */
 export default function useFrame() {
-  const { frameIndex } = useTimeline();
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<AssetData | null>(null);
+  const { frameIndex, isLoadingFrame, setIsLoadingFrame } = useTimeline();
+  const [data, setData] = useState<AssetData>();
 
   const fetchAssetData = async (frameIndex: number) => {
     try {
       const data = await FramesService.fetchJson(frameIndex, requestClient);
       setData(data);
-      setIsLoading(false);
+      setIsLoadingFrame(false);
     } catch (error) {
       console.error("Failed to load buffer:", error);
-      setIsLoading(false);
+      setIsLoadingFrame(false);
     }
   };
 
@@ -35,5 +34,5 @@ export default function useFrame() {
     fetchAssetData(frameIndex);
   }, [frameIndex]);
 
-  return { data, isLoading, frameIndex };
+  return { data, isLoadingFrame, frameIndex };
 }
