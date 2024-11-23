@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
-  "prettier": ".prettierrc",
+  "prettier": {
+    "config": ".prettierrc"
+  },
   "scripts": {
     "build": "parcel build src/index.html",
     "start": "parcel serve src/index.html",
@@ -11,7 +13,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0", 
+    "@types/react-dom": "^18.2.0",
     "@types/three": "^0.156.0",
     "buffer": "^5.5.0||^6.0.0",
     "parcel": "^2.9.3",
