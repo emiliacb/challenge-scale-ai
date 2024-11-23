@@ -1,11 +1,12 @@
 import { Buffer } from "buffer";
 
 import { RequestClient } from "@/interfaces/request-client";
-import { FileConfigClient } from "@/clients/config-client";
+import { FileConfigClient } from "@/clients/config";
 
 const configClient = new FileConfigClient();
 
-export class AssetsService {
+// TODO - Add a cache layer to avoid fetching the same frame multiple times
+export class FramesService {
   /**
    * This method is a temporary implementation to test and validate the use of binary buffers
    * for asset data transfer. It serves as a proof of concept for future optimizations

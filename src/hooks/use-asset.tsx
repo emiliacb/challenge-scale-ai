@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { AssetsService } from "@/services/assets";
-import { RequestClient } from "@/clients/request-client";
+import { FramesService } from "@/services/frames";
+import { RequestClient } from "@/clients/request";
 import { AssetData } from "@/types/assets";
 
 const requestClient = new RequestClient();
@@ -37,7 +37,7 @@ export default function useAsset({ frameId }: { frameId: string }) {
 
   const fetchAssetData = async (frameId: string) => {
     try {
-      const data = await AssetsService.fetchJson(frameId, requestClient);
+      const data = await FramesService.fetchJson(frameId, requestClient);
       setData(data);
       setIsLoading(false);
     } catch (error) {
