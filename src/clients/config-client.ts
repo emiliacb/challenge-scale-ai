@@ -1,6 +1,20 @@
 import { ConfigClient } from "../interfaces/config-client";
 import config from "../../config";
 
+/**
+ * FileConfigClient implements the ConfigClient interface to provide configuration values
+ * from a local file source (config.ts).
+ *
+ * This implementation is primarily used for local development environments where
+ * configuration values are stored in a static file rather than retrieved from
+ * remote services or environment variables.
+ *
+ * Example usage:
+ * ```typescript
+ * const configClient = new FileConfigClient();
+ * const value = await configClient.getValue("some_key");
+ * ```
+ */
 export class FileConfigClient implements ConfigClient {
   async getValue<T>(key: string): Promise<T> {
     const value = config[key];
