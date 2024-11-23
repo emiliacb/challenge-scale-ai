@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Scene } from "@/components/scene";
+import { Timeline } from "@/components/timeline";
 
 /**
  * This component represents the home page of the application.
@@ -13,6 +15,7 @@ export default function Home() {
   return (
     <main>
       <h1>3D Scene Visualization</h1>
+      <Timeline />
       <Scene />
     </main>
   );

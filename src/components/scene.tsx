@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PointMaterial, Points } from "@react-three/drei";
+import { OrbitControls, PointMaterial, Points, Stats } from "@react-three/drei";
 
-import useAsset from "@/hooks/use-asset";
+import useFrame from "@/hooks/use-frame";
 import Spinner from "@/components/spinner";
 
 /**
@@ -11,14 +11,20 @@ import Spinner from "@/components/spinner";
  * The fetched data is then used to render the points and cuboids in the scene.
  */
 export function Scene() {
-  const { isLoading, data } = useAsset({ frameId: "00" });
+  const [renderKey, setRenderKey] = useState(0);
+  const { isLoading, data, frameIndex } = useFrame();
+
+  useEffect(() => {
+    setRenderKey(renderKey + 1);
+  }, [frameIndex]);
 
   return (
     <div style={{ width: "50vw", height: "50vh", border: "1px solid red" }}>
       {isLoading ? <Spinner /> : null}
       <Canvas camera={{ position: [0, 0, 50], fov: 40 }}>
+        <Stats />
         <OrbitControls />
-        <Points positions={data?.points}>
+        <Points key={renderKey} positions={data?.points}>
           <PointMaterial size={0.1} color="darkblue" />
         </Points>
       </Canvas>

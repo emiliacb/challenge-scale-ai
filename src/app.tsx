@@ -2,11 +2,14 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import Home from "@/pages/index";
+import { Providers } from "@/components/providers";
 
 const App = () => {
   return (
     <React.StrictMode>
-      <Home />
+      <Providers>
+        <Home />
+      </Providers>
     </React.StrictMode>
   );
 };

@@ -2,6 +2,8 @@
 
 A React-based 3D visualization tool that renders point clouds and cuboids from JSON data using Three.js and React Three Fiber.
 
+The challenge requirements can be found in [challenge.md](docs/challenge.md).
+
 ## Table of contents
 
 - [Features](#features)
