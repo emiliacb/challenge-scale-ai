@@ -1,4 +1,4 @@
-# 3D Scene Visualization
+# Scale AI Challenge
 
 A React-based 3D visualization tool that renders point clouds and cuboids from JSON data using Three.js and React Three Fiber.
 
