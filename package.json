@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
+  "prettier": ".prettierrc",
   "scripts": {
     "build": "parcel build src/index.html",
     "start": "parcel serve src/index.html",
