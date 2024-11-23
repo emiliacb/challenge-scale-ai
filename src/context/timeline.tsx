@@ -1,24 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
+import { TimelineContext } from "@/interfaces/timeline";
+import { TimelineProviderProps } from "@/types/timeline";
 
-interface TimelineContextType {
-  frameIndex: number;
-  setFrameIndex: (id: number) => void;
-  nextFrame: () => void;
-  previousFrame: () => void;
-  minFrame: number;
-  maxFrame: number;
-}
+const TimelineContext = createContext<TimelineContext | undefined>(undefined);
 
-const TimelineContext = createContext<TimelineContextType | undefined>(
-  undefined
-);
-
-interface TimelineProviderProps {
-  children: React.ReactNode;
-  minFrame: number;
-  maxFrame: number;
-}
-
+/**
+ * TimelineProvider manages the state and logic for a timeline, including frame navigation.
+ */
 export function TimelineProvider({
   children,
   minFrame,
@@ -40,17 +28,17 @@ export function TimelineProvider({
     }
   };
 
+  const value = {
+    frameIndex,
+    setFrameIndex,
+    nextFrame,
+    previousFrame,
+    minFrame,
+    maxFrame,
+  };
+
   return (
-    <TimelineContext.Provider
-      value={{
-        frameIndex,
-        setFrameIndex,
-        nextFrame,
-        previousFrame,
-        minFrame,
-        maxFrame,
-      }}
-    >
+    <TimelineContext.Provider value={value}>
       {children}
     </TimelineContext.Provider>
   );

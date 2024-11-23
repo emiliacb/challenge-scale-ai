@@ -14,18 +14,6 @@ const requestClient = new RequestClient();
  * This hook integrates with the TimelineContext to fetch asset data based on the current
  * frame index. It handles loading states and data fetching, abstracting away the complexity
  * of making API calls and managing state.
- *
- * @example
- * ```tsx
- * function MyComponent() {
- *   const { data, isLoading } = useFrame();
- *
- *   if (isLoading) return <Spinner />;
- *   if (!data) return null;
- *
- *   return <Scene points={data.points} />;
- * }
- * ```
  */
 export default function useFrame() {
   const { frameIndex } = useTimeline();

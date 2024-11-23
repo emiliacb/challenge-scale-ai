@@ -8,12 +8,6 @@ import config from "../../config";
  * This implementation is primarily used for local development environments where
  * configuration values are stored in a static file rather than retrieved from
  * remote services or environment variables.
- *
- * Example usage:
- * ```typescript
- * const configClient = new FileConfigClient();
- * const value = await configClient.getValue("some_key");
- * ```
  */
 export class FileConfigClient implements ConfigClient {
   async getValue<T>(key: string): Promise<T> {

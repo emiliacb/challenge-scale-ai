@@ -1,6 +1,9 @@
 import React from "react";
 import { useTimeline } from "@/context/timeline";
 
+/**
+ * Timeline component provides a user interface for navigating through frames of a timeline.
+ */
 export function Timeline() {
   const {
     frameIndex,
