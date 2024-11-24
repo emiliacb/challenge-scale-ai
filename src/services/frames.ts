@@ -36,7 +36,7 @@ export class FramesService {
    */
   static async fetchJson(frameIndex: number, requestClient: RequestClient) {
     const framesBaseUrl = await configClient.getValue("frames_base_url");
-    // TODO - There is be a better way to handle frame index formatting
+    // TODO - There is be a better way to handle frame id formatting
     const frameId = frameIndex < 10 ? `0${frameIndex}` : frameIndex.toString();
     const url = `${framesBaseUrl}/frame_${frameId}.json`;
     const response = await requestClient.fetch(url, { method: "GET" });

@@ -15,9 +15,11 @@ export function Timeline() {
     maxFrame,
     isPlaying,
     togglePlay,
+    isLoadingFrame,
   } = useTimeline();
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (isLoadingFrame) return;
     setFrameIndex?.(parseInt(event.target.value));
   };
 

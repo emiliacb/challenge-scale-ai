@@ -7,7 +7,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "lib": ["DOM", "ES2015.Promise", "ES5"],
+    "lib": ["DOM", "ES2015", "ES5"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
