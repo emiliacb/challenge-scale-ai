@@ -13,6 +13,8 @@ export function Timeline() {
     previousFrame,
     minFrame,
     maxFrame,
+    isPlaying,
+    togglePlay,
   } = useTimeline();
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +37,9 @@ export function Timeline() {
         />
         <button onClick={nextFrame} className="timeline-button">
           Next
+        </button>
+        <button onClick={togglePlay} className="timeline-button">
+          {isPlaying ? "Pause" : "Play"}
         </button>
       </div>
     </div>

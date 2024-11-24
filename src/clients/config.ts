@@ -1,4 +1,4 @@
-import { ConfigClient } from "../interfaces/config-client";
+import { ConfigClient } from "@/interfaces/config-client";
 import config from "../../config";
 
 /**
@@ -18,5 +18,9 @@ export class FileConfigClient implements ConfigClient {
     }
 
     return value as T;
+  }
+
+  async getConfig(): Promise<any> {
+    return config;
   }
 }
