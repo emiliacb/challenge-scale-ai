@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
+import * as THREE from "three";
 
 type PointsComponentProps = {
   frameIndex: number;
@@ -15,22 +16,28 @@ export default function PointsComponent({
   frameIndex,
   positions,
 }: PointsComponentProps) {
-  const [renderKey, setRenderKey] = useState(0);
+  const pointsRef = useRef<any>(null);
   const { invalidate } = useThree();
 
   useEffect(() => {
-    invalidate();
-    setRenderKey(renderKey + 1);
+    if (pointsRef.current && positions) {
+      pointsRef.current.geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
+      pointsRef.current.geometry.attributes.position.needsUpdate = true;
+      invalidate();
+    }
   }, [frameIndex, invalidate, positions]);
 
   return (
     <Points
-      positions={positions}
-      key={renderKey}
-      count={positions ? positions.length / 3 : 0}
+      ref={pointsRef}
+      positions={positions || new Float32Array([0, 0, 0])}
     >
       <PointMaterial
-        size={0.05}
+        transparent
+        size={0.005}
         sizeAttenuation={true}
         depthWrite={false}
         color="darkblue"
