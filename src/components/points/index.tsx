@@ -44,7 +44,7 @@ export default function PointsComponent({
     >
       <PointMaterial
         transparent
-        size={0.02}
+        size={0.1}
         sizeAttenuation={true}
         vertexColors
       />
