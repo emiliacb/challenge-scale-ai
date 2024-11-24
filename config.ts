@@ -9,4 +9,5 @@ export default {
   timeline_min_frame: 0,
   timeline_max_frame: 49,
   timeline_fps: 24,
+  prefetch_frames: true,
 } as Record<string, any>;

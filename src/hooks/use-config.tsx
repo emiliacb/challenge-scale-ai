@@ -9,6 +9,7 @@ type Config = {
   timeline_min_frame: number;
   timeline_max_frame: number;
   timeline_fps: number;
+  prefetch_frames: boolean;
 };
 
 const defaultConfig: Config = {
@@ -16,12 +17,13 @@ const defaultConfig: Config = {
   timeline_min_frame: 0,
   timeline_max_frame: 0,
   timeline_fps: 0,
+  prefetch_frames: false,
 };
 
 /**
  * Hook to access global configuration values
  */
-export function useConfig() {
+export default function useConfig() {
   const [configuration, setConfiguration] = useState<Config>(defaultConfig);
 
   useEffect(() => {

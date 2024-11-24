@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { FramesService } from "@/services/frames";
+import FramesService from "@/services/frames";
 import { RequestClient } from "@/clients/request";
 import { AssetData } from "@/types/assets";
 import { useTimeline } from "@/context/timeline";
@@ -21,7 +21,7 @@ export default function useFrame() {
 
   const fetchAssetData = async (frameIndex: number) => {
     try {
-      const data = await FramesService.fetchJson(frameIndex, requestClient);
+      const data = await FramesService.get(frameIndex, requestClient);
       setData(data);
       setIsLoadingFrame(false);
     } catch (error) {

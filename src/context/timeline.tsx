@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { TimelineContext } from "@/interfaces/timeline";
 import { useThrottleFn } from "react-use";
 import { useTimelineAnimation } from "@/hooks/use-timeline-animation";
-import { useConfig } from "@/hooks/use-config";
+import useConfig from "@/hooks/use-config";
 
 const TimelineContext = createContext<TimelineContext | undefined>(undefined);
 

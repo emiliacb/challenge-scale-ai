@@ -4,8 +4,8 @@ import { PointMaterial, Points } from "@react-three/drei";
 import * as THREE from "three";
 
 type PointsComponentProps = {
-  frameIndex: number;
-  positions: Float32Array | undefined;
+  frameIndex?: number;
+  positions?: Float32Array | undefined;
 };
 
 /**
