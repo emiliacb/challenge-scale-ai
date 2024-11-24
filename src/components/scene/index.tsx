@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
 import { useMedia } from "react-use";
@@ -12,6 +12,9 @@ import { useTimeline } from "@/lib/context/timeline";
 import { RequestClient } from "@/lib/clients/request";
 import { Cuboid } from "@/lib/types/frames";
 import { MEDIA } from "@/lib/constants/breakpoints";
+import Spinner from "@/components/spinner";
+
+import "./styles.css";
 
 const requestClient = new RequestClient();
 
@@ -25,8 +28,7 @@ export default function Scene() {
   const { data } = useFrame();
   const config = useConfig();
   const upMd = useMedia(MEDIA.upMd);
-
-  console.log(upMd);
+  const [isPreLoading, setIsPreLoading] = useState(false);
 
   /**
    * While preloading all frames into memory might not be scalable in all contexts,
@@ -46,43 +48,53 @@ export default function Scene() {
    */
   useEffect(() => {
     if (config.prefetch_frames) {
+      setIsPreLoading(true);
       FramesService.loadAll(
         config.timeline_min_frame,
         config.timeline_max_frame,
         requestClient
-      );
+      ).then(() => {
+        setIsPreLoading(false);
+      });
     }
   }, [config]);
 
   return (
-    <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
-      <OrbitControls
-        enablePan={true}
-        enableZoom={true}
-        enableRotate={true}
-        makeDefault
-      />
+    <>
+      {isPreLoading && (
+        <div className="scene_spinner">
+          <Spinner />
+        </div>
+      )}
+      <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
+        <OrbitControls
+          enablePan={true}
+          enableZoom={true}
+          enableRotate={true}
+          makeDefault
+        />
 
-      <GizmoHelper
-        alignment={upMd ? "bottom-right" : "top-right"}
-        margin={[80, 80]}
-      >
-        <GizmoViewport labelColor="white" />
-      </GizmoHelper>
+        <GizmoHelper
+          alignment={upMd ? "bottom-right" : "top-right"}
+          margin={[80, 80]}
+        >
+          <GizmoViewport labelColor="white" />
+        </GizmoHelper>
 
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
 
-      <PointsComponent
-        frameIndex={throttledFrameIndex ?? 0}
-        positions={data?.points}
-        colors={data?.colors}
-      />
+        <PointsComponent
+          frameIndex={throttledFrameIndex ?? 0}
+          positions={data?.points}
+          colors={data?.colors}
+        />
 
-      <Cubeids
-        frameIndex={throttledFrameIndex ?? 0}
-        cuboids={data?.cuboids ?? ([] as Cuboid[])}
-      />
-    </Canvas>
+        <Cubeids
+          frameIndex={throttledFrameIndex ?? 0}
+          cuboids={data?.cuboids ?? ([] as Cuboid[])}
+        />
+      </Canvas>
+    </>
   );
 }

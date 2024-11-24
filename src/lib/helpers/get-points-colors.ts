@@ -13,7 +13,7 @@ export function getPointsColors(
   positions: [number, number, number][]
 ): [number, number, number][] {
   return positions.map((position) => {
-    const color = interpolateColor(0, 0, 0.8, position[2] / 100);
+    const color = interpolateColor(0, 0.02, 0.8, position[2] / 100);
     return color;
   });
 }
