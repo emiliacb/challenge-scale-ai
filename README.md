@@ -22,10 +22,27 @@ The challenge requirements can be found in [challenge.md](docs/challenge.md).
 - Interactive timeline for frame navigation
 - Cache layer to avoid fetching the same frame multiple times
 - Basic decoupling using dependency inversion principle
-
-## Stack
+- Accessibility:
+  - Tab navigation
+  - Screen reader support
+  - Aria live region for the timeline
 
 ## Folder structure
+
+```
+src
+    ├── components
+    ├── lib
+    │   ├── clients
+    │   ├── context
+    │   ├── helpers
+    │   ├── hooks
+    │   ├── interfaces
+    │   ├── services
+    │   └── types
+    └── pages
+    └── styles
+```
 
 ## Prerequisites
 
