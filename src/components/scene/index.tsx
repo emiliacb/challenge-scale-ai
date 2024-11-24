@@ -24,7 +24,7 @@ const requestClient = new RequestClient();
  * The fetched data is then used to render the points and cuboids in the scene.
  */
 export default function Scene() {
-  const { throttledFrameIndex } = useTimeline();
+  const { throttledFrameIndex, isLoadingFrame } = useTimeline();
   const { data } = useFrame();
   const config = useConfig();
   const upMd = useMedia(MEDIA.upMd);
@@ -61,11 +61,18 @@ export default function Scene() {
 
   return (
     <>
-      {isPreLoading && (
-        <div className="scene_spinner">
-          <Spinner />
-        </div>
-      )}
+      <div className="scene_status">
+        {!data && !isLoadingFrame && (
+          <div className="scene_status_no_data">
+            <span>🚫</span> No data
+          </div>
+        )}
+        {isPreLoading && (
+          <div className="scene_status_spinner">
+            <Spinner />
+          </div>
+        )}
+      </div>
       <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
         <OrbitControls
           enablePan={true}

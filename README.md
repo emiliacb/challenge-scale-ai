@@ -22,6 +22,7 @@ The challenge requirements can be found in [challenge.md](docs/challenge.md).
 - Interactive timeline for frame navigation
 - Basic cache layer to avoid fetching the same frame multiple times
 - Basic decoupling using dependency inversion principle
+- Basic code splitting
 - Accessibility:
   - Tab navigation
   - Screen reader support

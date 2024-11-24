@@ -15,34 +15,37 @@ export default class FramesService {
    * to improve performance and reduce bandwidth usage.
    */
   static async get(frameIndex: number, requestClient: RequestClient) {
-    if (cache.has(frameIndex)) {
-      return cache.get(frameIndex);
+    try {
+      if (cache.has(frameIndex)) {
+        return cache.get(frameIndex);
+      }
+
+      const framesBaseUrl = await configClient.getValue("frames_base_url");
+      const frameId = frameIndex.toString().padStart(2, "0");
+      const url = `${framesBaseUrl}/frame_${frameId}.json`;
+      const response = await requestClient.fetch(url, { method: "GET" });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch asset: ${response.statusText}`);
+      }
+
+      const json = await response.json();
+
+      // We instantiate the arrays with the correct size to avoid unnecessary memory allocation
+      const points = new Float32Array(json.points.length * 3);
+      const colors = new Float32Array(json.points.length * 3);
+
+      points.set(json.points.flat());
+      colors.set(getPointsColors(json.points).flat());
+
+      const cuboids = json.cuboids;
+
+      cache.set(frameIndex, { points, cuboids, colors });
+      return { points, cuboids, colors };
+    } catch (error) {
+      console.error("Failed to load frame:", error);
+      return null;
     }
-
-    const framesBaseUrl = await configClient.getValue("frames_base_url");
-    // TODO - There is be a better way to handle frame id formatting
-    const frameId = frameIndex < 10 ? `0${frameIndex}` : frameIndex.toString();
-    const url = `${framesBaseUrl}/frame_${frameId}.json`;
-    const response = await requestClient.fetch(url, { method: "GET" });
-
-    if (!response.ok) {
-      // TODO - Add error types and error handling
-      throw new Error(`Failed to fetch asset: ${response.statusText}`);
-    }
-
-    const json = await response.json();
-
-    // We instantiate the arrays with the correct size to avoid unnecessary memory allocation
-    const points = new Float32Array(json.points.length * 3);
-    const colors = new Float32Array(json.points.length * 3);
-
-    points.set(json.points.flat());
-    colors.set(getPointsColors(json.points).flat());
-
-    const cuboids = json.cuboids;
-
-    cache.set(frameIndex, { points, cuboids, colors });
-    return { points, cuboids, colors };
   }
   static async loadAll(
     minFrame: number,

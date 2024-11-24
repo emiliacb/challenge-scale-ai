@@ -1,17 +1,32 @@
-.scene_spinner {
+.scene_status {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 1rem;
   left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .scene_status {
+    top: 2rem;
+    right: 2rem;
+    left: auto;
+  }
+}
+
+.scene_status_spinner {
+  margin-left: 2rem;
   height: 2rem;
   width: 2rem;
 }
 
 @media (min-width: 768px) {
-  .scene_spinner {
+  .scene_status_spinner {
     height: 3rem;
     width: 3rem;
-    top: 2rem;
-    right: 2rem;
-    left: auto;
   }
+}
+
+.scene_status_no_data {
+  width: fit-content;
 }
