@@ -32,8 +32,12 @@ export default class FramesService {
 
     const json = await response.json();
 
-    const points = new Float32Array(json.points.flat());
-    const colors = new Float32Array(getPointsColors(json.points).flat());
+    // We instantiate the arrays with the correct size to avoid unnecessary memory allocation
+    const points = new Float32Array(json.points.length * 3);
+    const colors = new Float32Array(json.points.length * 3);
+
+    points.set(json.points.flat());
+    colors.set(getPointsColors(json.points).flat());
 
     const cuboids = json.cuboids;
 

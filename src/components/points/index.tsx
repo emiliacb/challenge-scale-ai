@@ -22,10 +22,14 @@ export default function PointsComponent({
   const { invalidate } = useThree();
 
   useMemo(() => {
-    if (pointsRef.current && positions) {
+    if (pointsRef.current && positions && colors) {
       pointsRef.current.geometry.setAttribute(
         "position",
         new THREE.BufferAttribute(positions, 3)
+      );
+      pointsRef.current.geometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(colors, 3)
       );
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
       invalidate();
