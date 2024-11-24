@@ -1,31 +1,17 @@
-import React, { Suspense, lazy, useEffect } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import React, { useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 import FramesService from "@/services/frames";
 import useFrame from "@/hooks/use-frame";
 import useConfig from "@/hooks/use-config";
 import PointsComponent from "@/components/points";
+import Cubeids from "@/components/cubeids";
 import { useTimeline } from "@/context/timeline";
 import { RequestClient } from "@/clients/request";
+import { Cuboid } from "@/types/frames";
 
 const requestClient = new RequestClient();
-
-// Component to log camera position
-function CameraLogger() {
-  const { camera } = useThree();
-
-  useEffect(() => {
-    const logPosition = () => {
-      console.log("Camera position:", camera.position);
-    };
-
-    window.addEventListener("keydown", logPosition);
-    return () => window.removeEventListener("keydown", logPosition);
-  }, [camera]);
-
-  return null;
-}
 
 /**
  * This component represents the 3D visualization scene.
@@ -65,11 +51,24 @@ export default function Scene() {
 
   return (
     <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
-      <CameraLogger />
-      <OrbitControls />
+      <OrbitControls
+        enablePan={true}
+        enableZoom={true}
+        enableRotate={true}
+        makeDefault
+      />
+
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+
       <PointsComponent
         frameIndex={throttledFrameIndex ?? 0}
         positions={data?.points}
+      />
+
+      <Cubeids
+        frameIndex={throttledFrameIndex ?? 0}
+        cuboids={data?.cuboids ?? ([] as Cuboid[])}
       />
     </Canvas>
   );

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import FramesService from "@/services/frames";
 import { RequestClient } from "@/clients/request";
-import { AssetData } from "@/types/assets";
+import { FrameData } from "@/types/frames";
 import { useTimeline } from "@/context/timeline";
 
 const requestClient = new RequestClient();
@@ -17,9 +17,9 @@ const requestClient = new RequestClient();
  */
 export default function useFrame() {
   const { frameIndex, isLoadingFrame, setIsLoadingFrame } = useTimeline();
-  const [data, setData] = useState<AssetData>();
+  const [data, setData] = useState<FrameData>();
 
-  const fetchAssetData = async (frameIndex: number) => {
+  const fetchFrameData = async (frameIndex: number) => {
     try {
       const data = await FramesService.get(frameIndex, requestClient);
       setData(data);
@@ -31,7 +31,7 @@ export default function useFrame() {
   };
 
   useEffect(() => {
-    fetchAssetData(frameIndex);
+    fetchFrameData(frameIndex);
   }, [frameIndex]);
 
   return { data, isLoadingFrame, frameIndex };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { PointMaterial, Points } from "@react-three/drei";
 import * as THREE from "three";
@@ -20,15 +20,18 @@ export default function PointsComponent({
   const { invalidate } = useThree();
 
   useEffect(() => {
+    return () => invalidate();
+  }, [frameIndex]);
+
+  useMemo(() => {
     if (pointsRef.current && positions) {
       pointsRef.current.geometry.setAttribute(
         "position",
         new THREE.BufferAttribute(positions, 3)
       );
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
-      invalidate();
     }
-  }, [frameIndex, invalidate, positions]);
+  }, [frameIndex, positions]);
 
   return (
     <Points
