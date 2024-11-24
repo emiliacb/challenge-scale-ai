@@ -97,16 +97,24 @@ button.secondary {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--color-primary-surface);
-  background-color: var(--color-primary-text);
   border: 1px solid transparent;
   border-radius: 2rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
+button.primary {
+  color: var(--color-primary-text);
+  background-color: var(--color-primary-surface);
+  border-color: var(--primary-border);
+}
+
 button.primary:hover {
-  background-color: var(--color-primary-text-hover);
+  background-color: var(--color-primary-surface-hover);
+}
+
+button.primary:active {
+  background-color: var(--color-primary-surface-active);
 }
 
 button.primary:focus {
@@ -114,30 +122,19 @@ button.primary:focus {
   box-shadow: var(--shadow-ring);
 }
 
-button.primary:active {
-  background-color: var(--color-primary-text-active);
-}
-
-button.primary:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
 /* Secondary button variant */
 button.secondary {
   color: var(--color-secondary-text);
   background-color: var(--color-secondary-surface);
-  border-color: 1px solid transparent;
+  border-color: var(--secondary-border);
 }
 
 button.secondary:hover {
   background-color: var(--color-secondary-surface-hover);
-  border-color: var(--color-secondary-border-hover);
 }
 
 button.secondary:active {
   background-color: var(--color-secondary-surface-active);
-  border-color: var(--color-secondary-border-active);
 }
 
 /* Utility classes */
