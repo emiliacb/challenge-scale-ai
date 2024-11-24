@@ -5,13 +5,14 @@
 
   /* Colors */
   --color-app-background: #f0f4f8;
+  --color-app-text: #1e5998;
 
   /* Primary colors - Light mode */
-  --color-primary-surface: #1e5998;
+  --color-primary-surface: #256ebc;
   --color-primary-surface-hover: #1e5998dd;
   --color-primary-surface-focus: #1e5998cc;
   --color-primary-surface-active: #1e5998bb;
-  --color-primary-text: #a9cef6;
+  --color-primary-text: #e1ecf8;
 
   /* Secondary colors - Light mode */
   --color-secondary-surface: #d0eaff;

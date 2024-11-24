@@ -10,6 +10,6 @@ interface ProvidersProps {
  * It combines multiple context providers to make shared state and functionality
  * available throughout the component tree.
  */
-export function Providers({ children }: ProvidersProps) {
+export default function Providers({ children }: ProvidersProps) {
   return <TimelineProvider>{children}</TimelineProvider>;
 }

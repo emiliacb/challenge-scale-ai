@@ -9,8 +9,6 @@ import "./styles.css";
 
 /**
  * This component represents the home page of the application.
- * While it's placed in a "pages" directory, this is not using any routing framework.
- * The pages directory structure is maintained to make future routing integration easier if needed.
  */
 export default function Home() {
   return (
