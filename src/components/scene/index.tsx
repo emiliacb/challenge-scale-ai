@@ -1,24 +1,38 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 import FramesService from "@/services/frames";
 import useFrame from "@/hooks/use-frame";
 import useConfig from "@/hooks/use-config";
-import Spinner from "@/components/spinner";
+import PointsComponent from "@/components/points";
 import { useTimeline } from "@/context/timeline";
 import { RequestClient } from "@/clients/request";
 
-const PointsComponent = lazy(() => import("@/components/points"));
-
 const requestClient = new RequestClient();
+
+// Component to log camera position
+function CameraLogger() {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const logPosition = () => {
+      console.log("Camera position:", camera.position);
+    };
+
+    window.addEventListener("keydown", logPosition);
+    return () => window.removeEventListener("keydown", logPosition);
+  }, [camera]);
+
+  return null;
+}
 
 /**
  * This component represents the 3D visualization scene.
  * It uses the useAsset hook to fetch the asset data for the given frame ID.
  * The fetched data is then used to render the points and cuboids in the scene.
  */
-export function Scene() {
+export default function Scene() {
   const { throttledFrameIndex } = useTimeline();
   const { data } = useFrame();
   const config = useConfig();
@@ -50,16 +64,13 @@ export function Scene() {
   }, [config]);
 
   return (
-    <div style={{ width: "50vw", height: "50vh", border: "1px solid red" }}>
-      <Suspense fallback={<Spinner />}>
-        <Canvas camera={{ position: [0, 0, 50], fov: 40 }}>
-          <OrbitControls />
-          <PointsComponent
-            frameIndex={throttledFrameIndex ?? 0}
-            positions={data?.points}
-          />
-        </Canvas>
-      </Suspense>
-    </div>
+    <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
+      <CameraLogger />
+      <OrbitControls />
+      <PointsComponent
+        frameIndex={throttledFrameIndex ?? 0}
+        positions={data?.points}
+      />
+    </Canvas>
   );
 }

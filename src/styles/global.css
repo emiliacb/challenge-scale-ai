@@ -1,0 +1,157 @@
+@import url("./variables.css");
+
+/* Reset default styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styles */
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-app-background);
+  color: var(--color-primary-text);
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-ring);
+}
+
+/* Links */
+a {
+  color: var(--color-primary-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-text-hover);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary-text);
+  color: var(--color-primary-surface);
+}
+
+/* Buttons */
+button.primary,
+button.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1rem;
+  font-family: var(--font-family-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-primary-surface);
+  background-color: var(--color-primary-text);
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button.primary:hover {
+  background-color: var(--color-primary-text-hover);
+}
+
+button.primary:focus {
+  outline: none;
+  box-shadow: var(--shadow-ring);
+}
+
+button.primary:active {
+  background-color: var(--color-primary-text-active);
+}
+
+button.primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Secondary button variant */
+button.secondary {
+  color: var(--color-secondary-text);
+  background-color: var(--color-secondary-surface);
+  border-color: 1px solid transparent;
+}
+
+button.secondary:hover {
+  background-color: var(--color-secondary-surface-hover);
+  border-color: var(--color-secondary-border-hover);
+}
+
+button.secondary:active {
+  background-color: var(--color-secondary-surface-active);
+  border-color: var(--color-secondary-border-active);
+}
+
+/* Utility classes */
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

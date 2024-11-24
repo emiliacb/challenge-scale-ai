@@ -4,6 +4,8 @@ import { createRoot } from "react-dom/client";
 import Home from "@/pages/index";
 import { Providers } from "@/components/providers";
 
+import "@/styles/global.css";
+
 const App = () => {
   return (
     <React.StrictMode>

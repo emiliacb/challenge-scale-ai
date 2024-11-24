@@ -37,10 +37,11 @@ export default function PointsComponent({
     >
       <PointMaterial
         transparent
-        size={0.005}
-        sizeAttenuation={true}
+        size={0.02}
         depthWrite={false}
-        color="darkblue"
+        color={new THREE.Color(0x0022dd)}
+        sizeAttenuation={true}
+        toneMapped={false}
       />
     </Points>
   );
