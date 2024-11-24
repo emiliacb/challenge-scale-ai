@@ -20,7 +20,7 @@ The challenge requirements can be found in [challenge.md](docs/challenge.md).
 - Full-screen 3D visualization
 - Interactive camera controls (pan, zoom, rotate)
 - Interactive timeline for frame navigation
-- Cache layer to avoid fetching the same frame multiple times
+- Basic cache layer to avoid fetching the same frame multiple times
 - Basic decoupling using dependency inversion principle
 - Accessibility:
   - Tab navigation
