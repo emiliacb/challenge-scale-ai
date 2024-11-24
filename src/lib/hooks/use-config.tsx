@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { FileConfigClient } from "@/clients/config";
+import { FileConfigClient } from "@/lib/clients/config";
 
 const configClient = new FileConfigClient();
 

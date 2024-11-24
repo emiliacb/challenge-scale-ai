@@ -1,5 +1,5 @@
 import { ConfigClient } from "@/lib/interfaces/config-client";
-import config from "../../config";
+import config from "../../../config";
 
 /**
  * FileConfigClient implements the ConfigClient interface to provide configuration values

@@ -1,8 +1,8 @@
 import { Buffer } from "buffer";
 
 import { RequestClient } from "@/lib/interfaces/request-client";
-import { FileConfigClient } from "@/clients/config";
-
+import { FileConfigClient } from "@/lib/clients/config";
+import { getPointsColors } from "@/lib/helpers/get-points-colors";
 const configClient = new FileConfigClient();
 
 const cache = new Map<number, any>();
@@ -31,13 +31,14 @@ export default class FramesService {
     }
 
     const json = await response.json();
-    // TODO - Transform the points, including the color by z
+
     const points = new Float32Array(json.points.flat());
-    // TODO - Transform the cuboids with the format to be used in the scene
+    const colors = new Float32Array(getPointsColors(json.points).flat());
+
     const cuboids = json.cuboids;
 
-    cache.set(frameIndex, { points, cuboids });
-    return { points, cuboids };
+    cache.set(frameIndex, { points, cuboids, colors });
+    return { points, cuboids, colors };
   }
   static async loadAll(
     minFrame: number,

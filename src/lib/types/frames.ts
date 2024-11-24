@@ -17,5 +17,6 @@ export type Cuboid = {
 export type FrameData = {
   frameId: string;
   points: Float32Array;
+  colors: Float32Array;
   cuboids: Cuboid[];
 };

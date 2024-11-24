@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import FramesService from "@/lib/services/frames";
-import { RequestClient } from "@/clients/request";
+import { RequestClient } from "@/lib/clients/request";
 import { FrameData } from "@/lib/types/frames";
 import { useTimeline } from "@/lib/context/timeline";
 

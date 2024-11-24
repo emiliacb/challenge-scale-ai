@@ -6,6 +6,7 @@ import * as THREE from "three";
 type PointsComponentProps = {
   frameIndex?: number;
   positions?: Float32Array | undefined;
+  colors?: Float32Array | undefined;
 };
 
 /**
@@ -15,13 +16,10 @@ type PointsComponentProps = {
 export default function PointsComponent({
   frameIndex,
   positions,
+  colors,
 }: PointsComponentProps) {
   const pointsRef = useRef<any>(null);
   const { invalidate } = useThree();
-
-  useEffect(() => {
-    return () => invalidate();
-  }, [frameIndex]);
 
   useMemo(() => {
     if (pointsRef.current && positions) {
@@ -30,6 +28,7 @@ export default function PointsComponent({
         new THREE.BufferAttribute(positions, 3)
       );
       pointsRef.current.geometry.attributes.position.needsUpdate = true;
+      invalidate();
     }
   }, [frameIndex, positions]);
 
@@ -37,14 +36,13 @@ export default function PointsComponent({
     <Points
       ref={pointsRef}
       positions={positions || new Float32Array([0, 0, 0])}
+      colors={colors}
     >
       <PointMaterial
         transparent
         size={0.02}
-        depthWrite={false}
-        color={new THREE.Color(0x0022dd)}
         sizeAttenuation={true}
-        toneMapped={false}
+        vertexColors
       />
     </Points>
   );
