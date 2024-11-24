@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
+import { useMedia } from "react-use";
 
 import FramesService from "@/lib/services/frames";
 import useFrame from "@/lib/hooks/use-frame";
@@ -10,6 +11,7 @@ import Cubeids from "@/components/cubeids";
 import { useTimeline } from "@/lib/context/timeline";
 import { RequestClient } from "@/lib/clients/request";
 import { Cuboid } from "@/lib/types/frames";
+import { MEDIA } from "@/lib/constants/breakpoints";
 
 const requestClient = new RequestClient();
 
@@ -22,6 +24,9 @@ export default function Scene() {
   const { throttledFrameIndex } = useTimeline();
   const { data } = useFrame();
   const config = useConfig();
+  const upMd = useMedia(MEDIA.upMd);
+
+  console.log(upMd);
 
   /**
    * While preloading all frames into memory might not be scalable in all contexts,
@@ -58,7 +63,10 @@ export default function Scene() {
         makeDefault
       />
 
-      <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+      <GizmoHelper
+        alignment={upMd ? "bottom-right" : "top-right"}
+        margin={[80, 80]}
+      >
         <GizmoViewport labelColor="white" />
       </GizmoHelper>
 

@@ -27,14 +27,9 @@
 
   /* Gradients */
   --gradient-primary: linear-gradient(
-    135deg,
+    180deg,
     var(--color-primary-surface) 0%,
-    var(--color-secondary-surface) 100%
-  );
-  --gradient-secondary: linear-gradient(
-    45deg,
-    var(--color-primary-surface-hover) 0%,
-    var(--color-secondary-surface-hover) 100%
+    var(--color-primary-surface-active) 100%
   );
 
   /* Shadows */
