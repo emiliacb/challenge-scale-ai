@@ -1,6 +1,6 @@
 import { Buffer } from "buffer";
 
-import { RequestClient } from "@/interfaces/request-client";
+import { RequestClient } from "@/lib/interfaces/request-client";
 import { FileConfigClient } from "@/clients/config";
 
 const configClient = new FileConfigClient();

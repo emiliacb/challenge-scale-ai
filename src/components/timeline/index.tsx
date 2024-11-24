@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useTimeline } from "@/context/timeline";
+import { useTimeline } from "@/lib/context/timeline";
 import { Icon } from "@/components/icon";
 
 import "./styles.css";

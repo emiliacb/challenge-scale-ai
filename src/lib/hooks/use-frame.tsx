@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import FramesService from "@/services/frames";
+import FramesService from "@/lib/services/frames";
 import { RequestClient } from "@/clients/request";
-import { FrameData } from "@/types/frames";
-import { useTimeline } from "@/context/timeline";
+import { FrameData } from "@/lib/types/frames";
+import { useTimeline } from "@/lib/context/timeline";
 
 const requestClient = new RequestClient();
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Edges, Html } from "@react-three/drei";
-import { Cuboid } from "@/types/frames";
+import { Cuboid } from "@/lib/types/frames";
 
 import "./styles.css";
 

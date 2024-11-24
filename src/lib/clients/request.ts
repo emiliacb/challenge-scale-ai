@@ -1,7 +1,7 @@
 import {
   RequestClient as RequestClientInterface,
   RequestOptions,
-} from "@/interfaces/request-client";
+} from "@/lib/interfaces/request-client";
 
 /**
  * RequestClient implements the RequestClientInterface to provide a wrapper around

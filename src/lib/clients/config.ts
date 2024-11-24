@@ -1,4 +1,4 @@
-import { ConfigClient } from "@/interfaces/config-client";
+import { ConfigClient } from "@/lib/interfaces/config-client";
 import config from "../../config";
 
 /**

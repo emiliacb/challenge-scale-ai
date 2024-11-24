@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import {
+  OrbitControls,
+  GizmoHelper,
+  GizmoViewport,
+  KeyboardControls,
+} from "@react-three/drei";
 
-import FramesService from "@/services/frames";
-import useFrame from "@/hooks/use-frame";
-import useConfig from "@/hooks/use-config";
+import FramesService from "@/lib/services/frames";
+import useFrame from "@/lib/hooks/use-frame";
+import useConfig from "@/lib/hooks/use-config";
 import PointsComponent from "@/components/points";
 import Cubeids from "@/components/cubeids";
-import { useTimeline } from "@/context/timeline";
-import { RequestClient } from "@/clients/request";
-import { Cuboid } from "@/types/frames";
+import { useTimeline } from "@/lib/context/timeline";
+import { RequestClient } from "@/lib/clients/request";
+import { Cuboid } from "@/lib/types/frames";
 
 const requestClient = new RequestClient();
 
@@ -50,26 +55,39 @@ export default function Scene() {
   }, [config]);
 
   return (
-    <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
-      <OrbitControls
-        enablePan={true}
-        enableZoom={true}
-        enableRotate={true}
-        makeDefault
-      />
+    <KeyboardControls
+      map={[
+        { name: "moveForward", keys: ["w", "ArrowUp"] },
+        { name: "moveBackward", keys: ["s", "ArrowDown"] },
+        { name: "moveLeft", keys: ["a", "ArrowLeft"] },
+        { name: "moveRight", keys: ["d", "ArrowRight"] },
+      ]}
+    >
+      <Canvas camera={{ position: [0, -50, 50], fov: 80 }}>
+        <OrbitControls
+          enablePan={true}
+          enableZoom={true}
+          enableRotate={true}
+          makeDefault
+        />
 
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
+        <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+          <GizmoViewport labelColor="white" />
+        </GizmoHelper>
 
-      <PointsComponent
-        frameIndex={throttledFrameIndex ?? 0}
-        positions={data?.points}
-      />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
 
-      <Cubeids
-        frameIndex={throttledFrameIndex ?? 0}
-        cuboids={data?.cuboids ?? ([] as Cuboid[])}
-      />
-    </Canvas>
+        <PointsComponent
+          frameIndex={throttledFrameIndex ?? 0}
+          positions={data?.points}
+        />
+
+        <Cubeids
+          frameIndex={throttledFrameIndex ?? 0}
+          cuboids={data?.cuboids ?? ([] as Cuboid[])}
+        />
+      </Canvas>
+    </KeyboardControls>
   );
 }

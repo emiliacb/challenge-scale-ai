@@ -1,5 +1,5 @@
 import React from "react";
-import { TimelineProvider } from "@/context/timeline";
+import { TimelineProvider } from "@/lib/context/timeline";
 
 interface ProvidersProps {
   children: React.ReactNode;
